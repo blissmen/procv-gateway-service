@@ -41,7 +41,7 @@ services:
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/your-org/procv-gateway.git
+git clone [https://github.com/blissmen/procv-gateway-service.git]
 cd procv-gateway
 ```
 
