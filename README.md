@@ -1,86 +1,70 @@
-# 🚪 Gateway Service – API Gateway for ProCV
+# 🚪 Gateway Service – ProCV API Gateway
 
-This is the Gateway microservice for ProCV – responsible for routing, authentication, and request validation across the microservices powering the ProCV platform.
-
----
-
-## 🚀 Responsibilities
-
-- 🌐 Route requests to appropriate microservices (CV, Auth, Profile, etc.)
-- 🔐 Handle authentication and token validation
-- 🛡 Rate limiting and basic throttling
-- 🧰 Request/response logging for observability
-- ⚠ Centralized error handling and response shaping
+This is the **Gateway microservice** for the ProCV platform, designed to act as a centralized entry point to route requests and manage configuration across internal services.
 
 ---
 
-## 🛠 Tech Stack
+## 📦 Structure
 
-- **Golang** – High-performance core
-- **Gin** – Lightweight HTTP web framework
-- **JWT** – Authentication middleware
-- **Envconfig** – Environment variable management
-- **Swagger (optional)** – API documentation
+This service was scaffolded with simplicity and flexibility in mind.
 
----
-
-## 📁 Folder Structure
-
+### Current Structure:
 ```bash
 gateway-service/
-├── main.go
-├── router/
-│   └── routes.go
-├── middleware/
-│   ├── auth.go
-│   └── logger.go
 ├── config/
-│   └── config.go
-├── handlers/
-│   └── healthcheck.go
-└── go.mod
+│   └── config.yaml         # Central config for the gateway
+├── main.go                 # Application entry point
+├── go.mod                  # Module definition
+└── README.md
 ```
 
 ---
 
-## ⚙️ Getting Started
+## ⚙️ Configuration
+
+The gateway uses a single configuration file to manage service endpoints, port settings, and environment-specific flags.
+
+### Example `config.yaml`:
+```yaml
+server:
+  port: 8080
+
+services:
+  profile: http://localhost:5001
+  cv: http://localhost:5002
+  auth: http://localhost:5003
+```
+
+---
+
+## 🚀 Usage
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/your-username/procv-gateway.git
+git clone https://github.com/your-org/procv-gateway.git
 cd procv-gateway
 ```
 
-### 2. Set environment variables
-Create a `.env` or export the following:
-```env
-PORT=8080
-JWT_SECRET=your_super_secret_key
-CV_SERVICE_URL=http://localhost:8001
-AUTH_SERVICE_URL=http://localhost:8002
-```
+### 2. Update Configuration
+Edit `config/config.yaml` to match your local or deployed service URLs.
 
-### 3. Run the server
+### 3. Run the Gateway
 ```bash
 go run main.go
 ```
 
 ---
 
-## 🧪 Example Endpoints
-
-- `GET /health` → Health check
-- `POST /auth/login` → Routed to auth service
-- `POST /cv/generate` → Routed to CV service
+## 📌 Notes
+- This service currently supports static routing via config.
+- No embedded auth or middleware yet – this can be added in later iterations.
 
 ---
 
 ## 📜 License
-
 [MIT License](LICENSE)
 
 ---
 
-## 👨‍💻 Maintainer
-
-Built and maintained by **Tangwe Caleb Ojang** with 💙
+## 👨‍💻 Author
+Built by **Tangwe Caleb Ojang**
